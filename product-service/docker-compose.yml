@@ -1,7 +1,8 @@
 services:
-  mongodb:
+  mongo:
     image: mongo:latest
-    container_name: mongodb
+    command: mongod --auth
+    container_name: mongo
     ports:
       - "27017:27017"
     environment:
@@ -9,4 +10,4 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: password
       MONGO_INITDB_DATABASE: product-service
     volumes:
-      - ./data:/data/db
+      - ./docker/mongodb/data:/data/db
