@@ -24,8 +24,8 @@ public class ProductController {
         ProductDTO productCreated = productService.createProduct(productDTO);
 
         URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest() // → /resource
-                .path("/{id}")        // → /resource/{id}
+                .fromCurrentRequest()
+                .path("/{id}")
                 .buildAndExpand(productCreated.getId())
                 .toUri();
 
