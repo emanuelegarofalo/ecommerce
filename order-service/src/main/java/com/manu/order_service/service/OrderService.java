@@ -1,5 +1,6 @@
 package com.manu.order_service.service;
 
+import com.manu.order_service.client.InventoryClient;
 import com.manu.order_service.dto.OrderDTO;
 import com.manu.order_service.model.Order;
 import com.manu.order_service.mapper.OrderMapper;
@@ -16,9 +17,13 @@ import java.util.List;
 public class OrderService {
     private final OrderRepository repo;
     private final OrderMapper mapper;
+    private final InventoryClient inventoryClient;
 
     @Transactional
     public OrderDTO placeOrder(OrderDTO dto) {
+        if(!inventoryClient.isInStock(dto.getSkuCode(),dto.getQuantity())) {
+            throw new IllegalArgumentException("Product with SKU code " + dto.getSkuCode() + " is not in stock");
+        }
 
         return mapper.toDTO(
                 repo.save(

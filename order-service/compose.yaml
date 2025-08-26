@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: 'postgres_order_service'
+    environment:
+      - 'POSTGRES_DB=mydatabase'
+      - 'POSTGRES_PASSWORD=password'
+      - 'POSTGRES_USER=root'
+    ports:
+      - '5433:5432'

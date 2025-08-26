@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: postgres_inventory_service
+    environment:
+      - 'POSTGRES_DB=inventory-service'
+      - 'POSTGRES_PASSWORD=password'
+      - 'POSTGRES_USER=root'
+    ports:
+      - '5434:5432'
