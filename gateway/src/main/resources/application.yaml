@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: gateway
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8181/realms/master
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: product-service
+              uri: http://localhost:8080
+              predicates:
+                - Path=/products/**
+              filters:
+                - PrefixPath=/api
+            - id: order-service
+              uri: http://localhost:8081
+              predicates:
+                - Path=/orders/**
+              filters:
+                - PrefixPath=/api
+            - id: inventory-service
+              uri: http://localhost:8082
+              predicates:
+                - Path=/inventory/**
+              filters:
+                - PrefixPath=/api
+
+server:
+  port: 9000
+  
+  
